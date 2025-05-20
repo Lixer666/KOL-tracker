@@ -328,18 +328,6 @@ def extract_token_metrics(text):
     open_time = extract_open_time(text)
     dev_sell_all = extract_dev_status(text)
     
-    # Log raw extraction results to help debug
-    print(f"\n📊 RAW EXTRACTION RESULTS for message:")
-    print(f"KOL Count: {kol_count}")
-    print(f"Percentage: 5m={percent_5m}%, 1h={percent_1h}%, 6h={percent_6h}%")
-    print(f"TXs: {txs}, Vol: {vol}K")
-    print(f"MCP: {mcp}K")
-    print(f"Liquidity: {liquidity} SOL")
-    print(f"Holders: {holders}")
-    print(f"Open Time: {open_time} seconds")
-    print(f"DEV Sell All: {dev_sell_all}")
-    print("-" * 50)
-    
     return {
         'kol_count': kol_count,
         'percent_5m': percent_5m,
@@ -366,6 +354,9 @@ def check_criteria_type_1(metrics):
         return False
     return True
 
+    # Transaction 2112 = true
+    # Transaction 458 = false
+
 def check_criteria_type_2(metrics):
     """Check if token meets criteria type 2 (alternative criteria)"""
     if not (metrics['kol_count'] == 3):
@@ -381,7 +372,7 @@ def check_criteria(message):
     return check_criteria_type_1(metrics)
 
 def format_token_output(message):
-    """Format token data for human-readable output"""
+    """Format token data for human-readable output - concise version"""
     text = message.get('text', '')
     
     token_name = extract_token_name(text)
@@ -393,23 +384,10 @@ def format_token_output(message):
     liquidity = extract_liquidity(text)
     holders = extract_holders(text)
     open_time = extract_open_time(text)
-    date = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    token_link = extract_token_link(text)
     
-    # Format output with each field on a new line
-    output = f"Token Name: {token_name}\n"
-    output += f"Token Address: {token_address}\n"
-    output += f"Date: {date}\n"
-    output += f"KOL Count: {kol_count}\n"
-    output += f"Growth 5m: {percent_5m:.1f}%\n"
-    output += f"Growth 1h: {percent_1h:.1f}%\n"
-    output += f"Growth 6h: {percent_6h:.1f}%\n"
-    output += f"Transactions (5m): {txs}\n"
-    output += f"Volume (5m): ${vol:.1f}K\n"
-    output += f"MCP: ${mcp:.1f}K\n"
-    output += f"Liquidity: {liquidity:.2f} SOL\n"
-    output += f"Holders: {holders}\n"
-    output += f"Open Time: {open_time} seconds\n"
-    output += f"DEV Status: 🚨 Sell All\n"
-    output += "-" * 50  # Separator line
+    # Just output the essential transaction information
+    output = f"New Transaction: {token_name} ({token_address})"
+    output += f" | KOL: {kol_count} | MCP: ${mcp:.1f}K | 6h: {percent_6h:.1f}%"
     
     return output
