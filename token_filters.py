@@ -356,6 +356,7 @@ def check_criteria_type_1(metrics):
 
     # Transaction 2112 = true
     # Transaction 458 = false
+    # Transaction 1565 = false && MCP > 148 
 
 def check_criteria_type_2(metrics):
     """Check if token meets criteria type 2 (alternative criteria)"""

@@ -1,3 +1,6 @@
 [Filter: TYPE 2]
 New Transaction: CPC (CuWRHNV3LUT4yey9ewUaFmT7xEkBtEByWDyiq7gpump) | KOL: 3 | MCP: $148.6K | 6h: 3067.8%
 
+[Filter: TYPE 2]
+New Transaction: unbothered (2foEbauo7SQFjCxiEnLd11AoS3aoc9vXWTY7jGNMpump) | KOL: 3 | MCP: $146.7K | 6h: 3022.6%
+
